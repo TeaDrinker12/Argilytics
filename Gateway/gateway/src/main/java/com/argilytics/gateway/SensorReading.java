@@ -13,7 +13,7 @@ public final class SensorReading implements Reading {
         return new SensorReading(sensor);
     }
     @Override
-    public Date date() {
+    public Date timestamp() {
         return date;
     }
     @Override

@@ -3,6 +3,6 @@ package com.argilytics.gateway;
 import java.util.Date;
 
 public interface Reading {
-    Date date();
+    Date timestamp();
     Double temprature();
 }
