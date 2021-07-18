@@ -10,16 +10,18 @@ public class App
 {
     public static void main( String[] args )
     {
-        Sensor sensor = new VirtualSensor();
+        Sensor virtualSensor = new VirtualSensor();
         try {
             while (true) {
-                Double temprature = sensor.getTemprature();
-                Date date = new Date();
-                System.out.println(String.format("Temprature: %s - Date: %s", temprature, date));
+                Reading reading = SensorReading.from(virtualSensor);
+                System.out.println(formatReading(reading));
                 Thread.sleep(1000);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+    public static String formatReading(Reading reading) {
+        return String.format("Temprature: %s - Date: %s", reading.temprature(), reading.date());
     }
 }

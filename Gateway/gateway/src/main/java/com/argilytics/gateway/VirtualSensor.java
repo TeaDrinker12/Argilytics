@@ -3,7 +3,7 @@ package com.argilytics.gateway;
 import org.zeroturnaround.exec.*;
 import org.zeroturnaround.exec.stream.LogOutputStream;
 
-public class VirtualSensor implements Sensor {
+public final class VirtualSensor implements Sensor {
     Double temprature = null;
     public VirtualSensor() {
         System.out.println( "Hello World!" );
@@ -25,7 +25,7 @@ public class VirtualSensor implements Sensor {
     }
 
     @Override
-    public Double getTemprature() {
+    public Double temprature() {
         return temprature;
     }
     
