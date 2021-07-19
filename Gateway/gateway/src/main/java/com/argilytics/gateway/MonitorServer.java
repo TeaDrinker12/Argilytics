@@ -1,21 +1,23 @@
 package com.argilytics.gateway;
 
-import java.io.IOException;
+import java.util.Date;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public class MonitorServer {
     Service service;
     public MonitorServer() {
         System.out.println("monitor server class");
-        Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://dog.ceo/")
+        var retrofit = new Retrofit.Builder()
+            .baseUrl("https://jsonplaceholder.typicode.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
         
@@ -24,17 +26,36 @@ public class MonitorServer {
     }
 
     public static interface Service {
-        @GET("api/breeds/image/random")
-        Call<JsonObject> getDog();
+        @POST("/posts")
+        Call<JsonObject> sendReading(@Body JsonObject json);
     }
 
-    public String updateReading(Reading reading) {
+    public void sendReading(Reading reading) {
         try {
-            return service.getDog().execute().body().toString();
-        } catch (IOException e) {
+            var jsonPrototype = new ReadingJsonPrototype(reading);
+            var json = new Gson().toJsonTree(jsonPrototype).getAsJsonObject();
+            var call = this.service.sendReading(json);
+            call.enqueue(new Callback<JsonObject>(){
+                @Override
+                public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+                    System.out.println("response! " + response.body());
+                }
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
+                    System.out.println("failure! " + t);
+                }
+            });
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return "null";
+    }
+    public static final class ReadingJsonPrototype {
+        Date timestamp;
+        Double temprature;
+        ReadingJsonPrototype(Reading reading) {
+            this.timestamp = reading.timestamp();
+            this.temprature = reading.temprature();
+        }
     }
 }
