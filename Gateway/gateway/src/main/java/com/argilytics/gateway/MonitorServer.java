@@ -17,7 +17,7 @@ public class MonitorServer {
     public MonitorServer() {
         System.out.println("monitor server class");
         var retrofit = new Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
+            .baseUrl("http://localhost:9000")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
         
@@ -26,7 +26,7 @@ public class MonitorServer {
     }
 
     public static interface Service {
-        @POST("/posts")
+        @POST("/reading")
         Call<JsonObject> sendReading(@Body JsonObject json);
     }
 
