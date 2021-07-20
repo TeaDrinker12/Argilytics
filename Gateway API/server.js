@@ -1,5 +1,8 @@
 const express = require('express');
+const mongoose = require('mongoose');
 app = express();
+mongoose.connect('mongodb://localhost:27017/argilytics');
+const Reading = require('./model/reading');
 
 app.use(express.json());
 app.post("/reading", (req, res) => {
@@ -14,8 +17,13 @@ app.post("/reading", (req, res) => {
         temprature: req.body.temprature,
     }
     console.log("POST /reading: ");
+
+    new Reading(reading).save();
     console.log(reading);
-    return res.status(201).json(reading);
+    return res.status(201).json({
+        success: "Updated sucessfully",
+        reading: reading
+    });
 });
 app.use((req, res) => {
     return res.status(404).json({
