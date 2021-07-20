@@ -13,6 +13,8 @@ app.post("/reading", (req, res) => {
         timestamp: new Date(req.body.timestamp),
         temprature: req.body.temprature,
     }
+    console.log("POST /reading: ");
+    console.log(reading);
     return res.status(201).json(reading);
 });
 app.use((req, res) => {
