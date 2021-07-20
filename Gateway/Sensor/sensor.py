@@ -10,7 +10,7 @@ def adjust(temprature):
 
 temprature = initialTemprature()
 while True:
-    time.sleep(1)
     temprature = adjust(temprature)
     output = round(temprature, 1)
     print(output)
+    time.sleep(0.1)
