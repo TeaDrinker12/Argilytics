@@ -1,0 +1,22 @@
+{
+  "name": "argilytics-gateway-api",
+  "version": "1.0.0",
+  "description": "Receives sensor data from the gateway",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeaDrinker12/Argilytics.git"
+  },
+  "author": "TeaDrinker12",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/TeaDrinker12/Argilytics/issues"
+  },
+  "homepage": "https://github.com/TeaDrinker12/Argilytics#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
