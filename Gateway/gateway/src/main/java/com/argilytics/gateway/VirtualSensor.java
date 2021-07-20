@@ -9,7 +9,7 @@ public final class VirtualSensor implements Sensor {
         System.out.println( "Hello World!" );
         try {
             new ProcessExecutor()
-            .command("python", "-u", "./Sensor/sensor.py")
+            .command("python", "-u", "./sensor/virtual-sensor.py")
             .redirectOutput(new LogOutputStream(){
                 @Override
                 protected void processLine(String arg0) {
