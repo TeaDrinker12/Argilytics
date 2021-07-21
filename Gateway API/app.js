@@ -32,6 +32,6 @@ app.use((req, res) => {
 });
 
 const port = 9000
-app.listen(9000, () => {
+app.listen(port, () => {
     console.log(`Gateway API server is running http://localhost:${port}/`);
 });
