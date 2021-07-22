@@ -2,8 +2,10 @@ const express = require('express');
 app = express();
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/argilytics');
+const cors = require('cors');
 const Reading = require('./model/reading');
 
+app.use(cors({origin: '*'}));
 app.get("/reading", (req, res) => {
     console.log("GET /reading: ");
     Reading.find({}, null, { sort: {timestamp: 'descending'}, limit: 1 }, (err, docs) => {
