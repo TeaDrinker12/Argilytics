@@ -36,11 +36,17 @@ function SensorData() {
   if (gatewayDisconnected) {
     return <p>Gateway Disconnected</p>
   }
+  const style = {
+    color: (data.temprature > 15 ? 'red' : 'royalblue')
+  }
   return (
     <div className="Box">
     <p>
-      Temprature: {data.temprature}<sup>°C</sup>
+      Temprature
     </p>
+    <div className="Temprature" style={style}>
+    {data.temprature}<sup>°C</sup>
+    </div>
     </div>
   );
 }
